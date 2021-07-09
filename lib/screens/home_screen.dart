@@ -17,18 +17,51 @@ class _HomeScreenState extends State<HomeScreen> {
           title: Text('Bucket List'),
         ),
         body: Container(
-          child: Row(
+          padding: EdgeInsets.all(20.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Expanded(
-                child: TextField(
-                  controller: ctrl,
-                ),
+              Row(
+                children: [
+                  Expanded(
+                    child: TextField(
+                      controller: ctrl,
+                    ),
+                  ),
+                  ElevatedButton(
+                    onPressed: () {
+                      _saveBucketListItem();
+                    },
+                    child: Text('Save'),
+                  ),
+                ],
               ),
-              ElevatedButton(
-                onPressed: () {
-                  _saveBucketListItem();
-                },
-                child: Text('Save'),
+              SizedBox(
+                height: 20.0,
+              ),
+              Expanded(
+                child: StreamBuilder<QuerySnapshot>(
+                    stream: FirebaseFirestore.instance
+                        .collection('bucketList')
+                        .orderBy('created')
+                        .snapshots(),
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting)
+                        return CircularProgressIndicator();
+                      return ListView(
+                        // children: snapshot.data.docs.map((doc) => Text(doc.get('description'))).toList(),
+                        children: [
+                          for (var doc in snapshot.data.docs)
+                            Text(
+                              doc.get('description'),
+                              style: TextStyle(
+                                fontSize: 20.0,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                        ],
+                      );
+                    }),
               ),
             ],
           ),

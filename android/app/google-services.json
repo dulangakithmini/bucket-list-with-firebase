@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "955707162148",
+    "project_id": "firedulanga-91ba0",
+    "storage_bucket": "firedulanga-91ba0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:955707162148:android:fbf4017fda71e88daea2b1",
+        "android_client_info": {
+          "package_name": "com.dulanga.fire_dulanga"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "955707162148-24liuj5gj21f2e4q9o3ag3figjeg6u3u.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dulanga.fire_dulanga",
+            "certificate_hash": "276b052ba0c733c66f560f3e797928ce1ca4d50a"
+          }
+        },
+        {
+          "client_id": "955707162148-nncof1ob02u21p8004n1c86eor0blmp0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDHowVSnKQ__J0j1oA88--33iK7A8682VU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "955707162148-nncof1ob02u21p8004n1c86eor0blmp0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

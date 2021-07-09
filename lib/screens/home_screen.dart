@@ -6,6 +6,8 @@ class HomeScreen extends StatefulWidget {
   _HomeScreenState createState() => _HomeScreenState();
 }
 
+final TextEditingController ctrl = TextEditingController();
+
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
@@ -15,13 +17,18 @@ class _HomeScreenState extends State<HomeScreen> {
           title: Text('Bucket List'),
         ),
         body: Container(
-          child: Column(
+          child: Row(
             children: [
+              Expanded(
+                child: TextField(
+                  controller: ctrl,
+                ),
+              ),
               ElevatedButton(
                 onPressed: () {
-                  _logCurrentTime();
+                  _saveBucketListItem();
                 },
-                child: Text('Log current time'),
+                child: Text('Save'),
               ),
             ],
           ),
@@ -30,13 +37,22 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  void _logCurrentTime() async {
-    await FirebaseFirestore.instance.collection('collec').add({
-      /// data type is string
-      'currentTime': DateTime.now().toIso8601String(),
-
-      /// data type is Timestamp
-      // 'currentTime': DateTime.now(),
+  void _saveBucketListItem() async {
+    if (ctrl.text == null || ctrl.text.isEmpty) return;
+    await FirebaseFirestore.instance.collection('bucketList').add({
+      'created': Timestamp.now(),
+      'description': ctrl.text,
     });
+    ctrl.clear();
   }
+
+// void _logCurrentTime() async {
+//   await FirebaseFirestore.instance.collection('collec').add({
+  /// data type is string
+// 'currentTime': DateTime.now().toIso8601String(),
+
+  /// data type is Timestamp
+// 'currentTime': DateTime.now(),
+//   });
+// }
 }

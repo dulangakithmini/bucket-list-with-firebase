@@ -13,6 +13,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
+        backgroundColor: Colors.white,
         appBar: AppBar(
           title: Text('Bucket List'),
         ),
@@ -28,11 +29,21 @@ class _HomeScreenState extends State<HomeScreen> {
                       controller: ctrl,
                     ),
                   ),
-                  ElevatedButton(
-                    onPressed: () {
-                      _saveBucketListItem();
-                    },
-                    child: Text('Save'),
+                  Container(
+                    width: 80,
+                    height: 50,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        _saveBucketListItem();
+                      },
+                      child: Text(
+                        'Add',
+                        style: TextStyle(fontSize: 19),
+                      ),
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.pink,
+                      ),
+                    ),
                   ),
                 ],
               ),
@@ -52,12 +63,50 @@ class _HomeScreenState extends State<HomeScreen> {
                         // children: snapshot.data.docs.map((doc) => Text(doc.get('description'))).toList(),
                         children: [
                           for (var doc in snapshot.data.docs)
-                            Text(
-                              doc.get('description'),
-                              style: TextStyle(
-                                fontSize: 20.0,
-                                fontWeight: FontWeight.w600,
-                              ),
+                            Stack(
+                              children: [
+                                Row(
+                                  children: [
+                                    Expanded(
+                                      child: Container(
+                                        height: 80,
+                                        decoration: BoxDecoration(
+                                          color: Colors.pinkAccent,
+                                          borderRadius:
+                                              BorderRadius.circular(20.0),
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color: Colors.black26,
+                                              offset: Offset(0.0, 8.0),
+                                              blurRadius: 10.0,
+                                            ),
+                                          ],
+                                        ),
+                                        margin: EdgeInsets.all(10),
+                                        padding: EdgeInsets.all(20),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Text(
+                                              doc.get('description'),
+                                              style: TextStyle(
+                                                fontSize: 23.0,
+                                                fontWeight: FontWeight.w600,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                    IconButton(
+                                      onPressed: () {},
+                                      icon: Icon(Icons.check),
+                                      iconSize: 45,
+                                    ),
+                                  ],
+                                ),
+                              ],
                             ),
                         ],
                       );
